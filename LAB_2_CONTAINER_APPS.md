@@ -1,6 +1,7 @@
 # Lab 2 - Container Apps
+In this lab you set up a microservice architecture to plan Microsoft Exams.
 
-## Register docker containers
+## 1. Register docker containers
 ### 1. Setup Container Registry
 1. Navigate to `Create resource`
 2. Search for `Container Registry`
@@ -26,8 +27,8 @@
 2. Open the project in a terminal
 3. Build the images using:
 4. `az acr build --registry YOUR_REGISTRY_NAME --image exam-catalog:v1 ./exam-catalog`
-5. `az acr build --registry YOUR_REGISTRY_NAME --image exam-history:v1 ./exam-history`
-6. `az acr build --registry YOUR_REGISTRY_NAME --image exam-shop:v1 ./exam-shop`
+5. `az acr build --registry YOUR_REGISTRY_NAME --image exam-shop:v1 ./exam-shop`
+6. `az acr build --registry YOUR_REGISTRY_NAME --image exam-planner:v1 ./exam-planner`
 
 
 ## 2. Setup first Container App
@@ -98,7 +99,7 @@
 
 9. Choose `Create`
 
-## 3. Setup `exam-history` container
+## 3. Setup `exam-planner` container
 1. Open searchbar in the portal
 2. Search for `Container Apps Environments`
 3. Choose the environment that was just created
@@ -109,8 +110,8 @@
 | Field                      | Value               |
 |----------------------------|---------------------|
 | Subscription               | MTech               |
-| Resource group             | test                |
-| Container App name         | exam-history        |
+| Resource group             | YOUR_RESOURCE_GROUP |
+| Container App name         | exam-planner        |
 | Region                     | West Europe         |
 | Container Apps Environment | *Use default value* |
 
@@ -122,7 +123,7 @@
 | Use quickstart image | False                           |
 | Image source         | Azure Container Registry        |
 | Registry             | YOUR_REGISTRY_NAME.azurecr.io   |
-| Image                | exam-history                    |
+| Image                | exam-planner                    |
 | Image tag            | v1                              |
 | CPU and Memory       | 0.25 CPU cores, 0.5 Gi Memory   |
 | Ingress              | **Enabled**                     |
@@ -137,6 +138,34 @@
 
 9. Choose `Create`
 
-
-## 4. Visit the `exam-history` web app
+## 4. Visit the `exam-planner` web app
 1. Open in link showed after `Application Url` label
+
+
+## 5. (Extra) Test multiple revisions
+### Configure revision management
+1. Navigate to `exam-planner` Container App in the Azure Portal
+2. Open `Revision Management`
+3. Click `Choose revision mode` option in menu
+4. Choose `Multiple: Several revisions active simultaneously`
+
+### Create new `exam-planner` version
+1. Open local terminal in the `exam-microservices` project
+2. Open `exam-planner/index.js`
+3. Change `<h1>Available exams</h1>` to `<h1>Workshop exams</h1>`
+4. Build v2 of the exam-planner: `az acr build --registry YOUR_REGISTRY_NAME --image exam-planner:v2 ./exam-planner`
+
+### Enable v2 in `exam-planner` Container App
+1. Navigate to `exam-planner` Container App in the Azure Portal
+2. Open `Containers`
+3. Choose `Edit and deploy`
+4. Select `exam-planner` and choose `Edit`
+5. Change `Image tag` from `v1` to `v2` in side-panel
+6. Click `Save`
+
+### Split traffic 50/50 between revisions
+1. Open `Revision Management`
+2. Enter `50` as value for `Traffic` for both revisions
+3. Choose `Save`
+4. Open Container App url displayed in `Overview`
+5. Refresh multiple times to see the different revisions being served
