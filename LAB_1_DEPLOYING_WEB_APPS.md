@@ -41,13 +41,13 @@ In this lab you set up a WebApp with monitoring and Blob Storage integration
 14. Click `Next: Networking`
 15. Click `Next: Monitoring`
 
-6Enter the following values:
+1. Enter the following values:
 
-| Field                       | Value             |
-|-----------------------------|-------------------|
-| Enable Application Insights | Yes               |
-| Application Insights        | **Default value** |
-| Region                      | **Default value** |
+| Field                       | Value                                             |
+|-----------------------------|---------------------------------------------------|
+| Enable Application Insights | Yes                                               |
+| Application Insights        | Choose first option that has no (new) in the name |
+| Region                      | **Default value**                                 |
 
 16. Choose `Review + Create`
 17. Choose `Create`
@@ -63,7 +63,7 @@ In this lab you set up a WebApp with monitoring and Blob Storage integration
 2. Navigate to `Overview` section
 3. Click on `URL` to open site
 4. You should get a json response
-5. Navigate to `/failing`
+5. Navigate to `/WeatherForecast/Failing`
 6. You should get a server error
 
 ## 4. Debug production issues
@@ -74,7 +74,7 @@ In this lab you set up a WebApp with monitoring and Blob Storage integration
 5. Click `View Application Insight data`
 6. Checkout the graphs that shown recent errors
 7. Navigate to `Failures`
-8. Open the row containing `GET WeatherForecast/GetFailingWeatherForecast`
+8. Open the row containing `GET WeatherForecast/Failing`
 9. Choose `500` in `Top 3 response codes`
 10. Choose the first sample operation
 11. Click on the first `EXCEPTION` record
@@ -94,7 +94,7 @@ In this lab you set up a WebApp with monitoring and Blob Storage integration
 2. Open your resource group
 3. Open the created WebApp
 4. Open the URL
-5. Navigate to `/failing`
+5. Navigate to `/WeatherForecast/Failing`
 6. You should get a json response
 
 ## 7. Setup Blob Container for news
@@ -156,7 +156,7 @@ In this lab you set up a WebApp with monitoring and Blob Storage integration
 ## 10. Test your Web App with Blob Storage connection
 1. Navigate to the `Overview` section of your Web App
 2. Open the url shown after the `URL` label
-3. Navigate to `/news`
+3. Navigate to `/News/Latest`
 4. You should see the message you placed in the `news.txt` file
 
 ## 11. Checkout Resource Map
