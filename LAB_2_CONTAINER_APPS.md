@@ -1,6 +1,20 @@
 # Lab 2 - Container Apps
 In this lab you set up a microservice architecture to plan Microsoft Exams.
 
+## 0. Setup
+### 1. Install Azure CLI
+#### Mac
+1. `brew install azure-cli`
+#### Windows
+1. Download and install from [Azure CLI Docs](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli)
+#### Resources
+- [Microsoft Guide](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+
+### 2. Login to Azure
+1. `az login`
+2. **If you have multiple subscriptions:** `az account set --subscription 'workshop-subscription-id-here'`. Subscription id can be found in `Subscription` overview in Azure.
+
+
 ## 1. Register docker containers
 ### 1. Setup Container Registry
 1. Navigate to `Create resource`
